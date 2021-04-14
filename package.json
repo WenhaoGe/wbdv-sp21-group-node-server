@@ -1,0 +1,16 @@
+{
+  "name": "wbdv-sp21-group-node-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wenhao Ge, Yiya He, Jiahao Cai",
+  "license": "ISC",
+  "dependencies": {
+    "expree": "^0.0.7",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.12.3"
+  }
+}
