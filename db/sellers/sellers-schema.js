@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const sellersSchema = mongoose.Schema({
     // _id is automatically generated
     generic_id: {type: mongoose.Schema.Types.ObjectId, ref: "usersModel"},
-    storage_location: {
+    storageLocation: {
         addressLineOne: String,
         addressLineTwo: String,
         city: String,
