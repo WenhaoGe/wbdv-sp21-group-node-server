@@ -10,7 +10,8 @@ const sellersSchema = mongoose.Schema({
         state: String,
         postalCode: String,
         country: String
-    }
+    },
+    storeName: String
 })
 
 module.exports = sellersSchema
