@@ -1,6 +1,8 @@
 const sellersModel = require("../db/sellers/sellers-model")
 
-const createASeller = (newSeller) => sellersModel.create(newSeller)
+const createASeller = (newSeller) => {
+    return sellersModel.create(newSeller)
+}
 
 module.exports = {
     createASeller

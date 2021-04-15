@@ -31,5 +31,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+require("./controllers/users-controller")(app)
 
 app.listen(4000)

@@ -12,6 +12,6 @@ const sellersSchema = mongoose.Schema({
         country: String
     },
     storeName: String
-})
+}, {collection: "sellers"})
 
 module.exports = sellersSchema

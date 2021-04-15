@@ -5,6 +5,6 @@ const buyersSchema = mongoose.Schema({
     // add more if needed!
     // e.x. fakeCardInfo?
     //
-})
+}, {collection: "buyers"})
 
 module.exports = buyersSchema
