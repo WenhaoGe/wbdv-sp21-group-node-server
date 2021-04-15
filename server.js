@@ -3,7 +3,7 @@ const app = express()
 
 // TODO: change connected db name
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/whiteboard',
+mongoose.connect('mongodb://localhost:27017/final-project',
     {useNewUrlParser: true, useUnifiedTopology: true});
 
 const session = require('express-session')
@@ -11,7 +11,6 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    // cookie: { secure: true }
 }))
 
 
