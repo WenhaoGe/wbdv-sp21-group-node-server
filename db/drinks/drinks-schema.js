@@ -1,8 +1,8 @@
 const mongoose = require("mongoose")
 
 const drinksSchema = mongoose.Schema({
-                                         drinkId: String,
-                                         drinkName: String,
+                                         idDrink: String,
+                                         nameDrink: String,
                                          category: String,
                                          alcoholic: String,
                                          imageURL: String,

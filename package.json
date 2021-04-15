@@ -12,6 +12,7 @@
     "body-parser": "^1.19.0",
     "expree": "^0.0.7",
     "express-session": "^1.17.1",
-    "mongoose": "^5.12.3"
+    "mongoose": "^5.12.3",
+    "node-fetch": "^2.6.1"
   }
 }
