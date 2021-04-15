@@ -1,11 +1,18 @@
 const usersModel = require("../db/users/users-model")
 
-const createAUser = (newUser) => usersModel.create(newUser)
-const findUserByUsername = (username) => usersModel.findOne({username: username})
+const createUser = (newUser) => {
+    return usersModel.create(newUser)
+}
+const findUserByUsername = (username) => {
+    return usersModel.findOne({username: username})
+}
 
-const findUserByC
+const findUserByCredentials = (username, password) => {
+    return usersModel.findOne({username: username, password: password})
+}
 
 module.exports = {
-    createAUser,
-    findUserByUsername
+    createUser,
+    findUserByUsername,
+    findUserByCredentials
 }
