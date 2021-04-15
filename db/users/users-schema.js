@@ -21,3 +21,4 @@ const usersSchema = mongoose.Schema({
 }, {collection: "users"})
 
 module.exports = usersSchema
+
