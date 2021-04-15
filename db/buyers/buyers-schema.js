@@ -7,7 +7,7 @@ const buyersSchema = mongoose.Schema({
         LineTwo: String,
         city: String,
         state: String,
-        postcode: Number,
+        postcode: String,
         country: String
 
     }
