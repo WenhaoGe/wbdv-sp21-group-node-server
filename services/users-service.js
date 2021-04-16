@@ -1,4 +1,4 @@
-const usersDAO = require("../../daos/users-dao")
+const usersDAO = require("../daos/users-dao")
 
 const createUserByRole = (newUser) => {
     switch (newUser.role) {

@@ -10,13 +10,24 @@ const findDrinkByName = (drinkName) => {
 const findDrinkById = (drinkID) => {
     return drinksModel.find({drinkID: drinkID})
 }
+
 const createADrink = (drink) => {
     return drinksModel.create(drink)
+}
+
+const findDrinksAllCategory = () => {
+    return drinksModel.distinct("category")
+}
+
+const findDrinksByCategory = (category) => {
+    return drinksModel.find({category})
 }
 
 module.exports = {
     findAllDrinks,
     findDrinkById,
     findDrinkByName,
-    createADrink
+    createADrink,
+    findDrinksAllCategory,
+    findDrinksByCategory
 }

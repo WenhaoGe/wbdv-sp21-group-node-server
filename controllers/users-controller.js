@@ -1,4 +1,4 @@
-const usersService = require("../services/users/users-service")
+const usersService = require("../services/users-service")
 // const usersDAO = require("../daos/users-dao")
 
 module.exports = (app) => {
