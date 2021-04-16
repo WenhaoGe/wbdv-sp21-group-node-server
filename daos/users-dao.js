@@ -4,7 +4,7 @@ const createUser = (newUser) => {
     return usersModel.create(newUser)
 }
 const findUserByUsername = (username) => {
-    return usersModel.findOne({username: username})
+    return usersModel.findOne({username})
 }
 
 const findUserByCredentials = (username, password) => {
@@ -19,10 +19,16 @@ const findUserById = (userId) => {
     return usersModel.findById(userId)
 }
 
+// For sllers
+const findSellerByStoreName = (storeName) => {
+    return usersModel.findOne({storeName})
+}
+
 module.exports = {
     createUser,
     findUserByUsername,
     findUserByCredentials,
     findAllUsers,
-    findUserById
+    findUserById,
+    findSellerByStoreName
 }

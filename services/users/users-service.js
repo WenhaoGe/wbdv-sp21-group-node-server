@@ -1,49 +1,46 @@
 const usersDAO = require("../../daos/users-dao")
-const adminsService = require('../admins/admins-service')
-const buyersService = require('../buyers/buyers-service')
-const sellersService = require('../sellers/sellers-service')
-
 
 const createUserByRole = (newUser) => {
-    // check user role
-    let created = usersDAO.createUser(newUser)
     switch (newUser.role) {
         case 'Admin':
             const newAdmin = {
-                generic_id: newUser._id,
+                ...newUser,
                 title: newUser.title,
                 authority: newUser.authority
             }
-            adminsService.createAAdmin(newAdmin).then(()=> {
-                return created
-            })
-            break
+            return usersDAO.createUser(newAdmin)
+        // break
         case 'Buyer':
             const newBuyer = {
-                generic_id: newUser._id,
+                ...newUser,
             }
-            buyersService.createABuyer(newBuyer).then(() => {
-                return created
-            })
-            break
+            return usersDAO.createUser(newBuyer)
         case 'Seller':
+
             const newSeller = {
-                generic_id: newUser._id,
+                ...newUser,
                 storageLocation: newUser.storageLocation,
                 storeName: newUser.storeName
             }
-            sellersService.createASeller(newSeller).then(()=>{
-                return created
+            return usersDAO.findSellerByStoreName(newUser.storeName).
+                then((found) => {
+                    if (found) {
+
+                    } else {
+                        return usersDAO.createUser(newSeller)
+                    }
             })
-            break
     }
 }
 
 // implement logic here
 const register = (newUser) => {
+    console.log(newUser)
     return usersDAO.findUserByUsername(newUser.username)
-        .then((user) => {
-            if (user) {
+        .catch(error => console.log(error))
+        .then((existingUser) => {
+            if (existingUser) {
+
             } else {
                 return createUserByRole(newUser)
             }
@@ -51,16 +48,12 @@ const register = (newUser) => {
 }
 
 const login = (credentials) => {
-    return usersDAO.findUserByCredentials(credentials)
-        .then((user) => {
-            return user
-        })
+    return usersDAO.findUserByCredentials(credentials.username, credentials.password)
 }
 
 const createUser = (user) => {
-    return createUserByRole(user)
+    return register(user)
 }
-
 
 module.exports = {
     register,

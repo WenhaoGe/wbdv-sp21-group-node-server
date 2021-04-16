@@ -17,7 +17,21 @@ const usersSchema = mongoose.Schema({
         state: String,
         postalCode: String,
         country: String
-    }
+    },
+    // for sellers
+    storageLocation: {
+        addressLineOne: String,
+        addressLineTwo: String,
+        city: String,
+        state: String,
+        postalCode: String,
+        country: String
+    },
+    storeName: String,
+    // for admins
+    title: String,
+    authority: String // [READ, WRITE, ALL]? or enum: [] you can choose and update
+    // for buyers
 }, {collection: "users"})
 
 module.exports = usersSchema
