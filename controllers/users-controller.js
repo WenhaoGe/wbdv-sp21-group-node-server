@@ -38,8 +38,8 @@ module.exports = (app) => {
     }
 
     const logout = (req, res) => {
-        req.logout()
-        res.sendStatus(401)
+        req.session.destroy()
+        res.sendStatus(200)
     }
 
     app.post('/api/register', register)
