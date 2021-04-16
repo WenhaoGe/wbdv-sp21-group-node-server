@@ -16,11 +16,12 @@ app.use(session({
 
 // configure CORS
 app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', ['http://localhost:3000']);
     res.header('Access-Control-Allow-Headers',
         'Content-Type, X-Requested-With, Origin');
     res.header('Access-Control-Allow-Methods',
         'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+    res.header("Access-Control-Allow-Credentials", "true");
     next();
 });
 
@@ -31,5 +32,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+require("./controllers/users-controller")(app)
+require("./controllers/drinks-controller")(app)
+require("./controllers/products-controller")(app)
 
 app.listen(4000)
