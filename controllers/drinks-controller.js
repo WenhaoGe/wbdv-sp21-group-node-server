@@ -9,13 +9,13 @@ module.exports = (app) => {
     }
 
     const findDrinksByCategory = (req, res) => {
-        const category = req.params.category
-        drinksService.findDrinksByCategory(category)
+        const category = req.body
+        drinksService.findDrinksByCategory(category.category)
             .then((drinks) => {
-                res.session(drinks)
+                res.send(drinks)
             })
     }
 
     app.get('/api/drinks/categories', findDrinksAllCategory)
-    app.get('/api/drinks/category/:category', findDrinksByCategory)
+    app.post('/api/drinks/category', findDrinksByCategory)
 }

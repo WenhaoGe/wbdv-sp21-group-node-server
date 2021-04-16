@@ -9,5 +9,14 @@ module.exports = (app) => {
             })
     }
 
+    const createProduct = (req, res) => {
+        const product = req.body
+        productsService.createProduct(product)
+            .then((actualProduct) => {
+                res.send(actualProduct)
+            })
+    }
+
     app.get('/api/products/:sellerId', findProductsForSeller)
+    app.post('/api/products', createProduct)
 }

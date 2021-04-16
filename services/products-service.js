@@ -4,6 +4,11 @@ const findProductsForSeller = (seller) => {
     return productsDAO.findProductsForSeller(seller)
 }
 
+const createProduct = (product) => {
+    return productsDAO.createProduct(product)
+}
+
 module.exports = {
-    findProductsForSeller
+    findProductsForSeller,
+    createProduct
 }
