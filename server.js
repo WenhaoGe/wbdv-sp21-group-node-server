@@ -18,7 +18,9 @@ app.use(session({
 
 // configure CORS
 app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', ['http://localhost:3000']);
+    res.header('Access-Control-Allow-Origin', ['http://localhost:3000',
+                                               "https://wbdv-sp21-final-p-client-react.herokuapp.com",
+                                               "https://wbdv-sp21-final-p-server-node.herokuapp.com/"]);
     res.header('Access-Control-Allow-Headers',
         'Content-Type, X-Requested-With, Origin');
     res.header('Access-Control-Allow-Methods',
