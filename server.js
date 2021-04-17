@@ -18,7 +18,7 @@ app.use(session({
 
 // configure CORS
 const local_client = 'http://localhost:3000'
-const remote_client = "https://wbdv-sp21-final-p-client-react.herokuapp.com"
+const remote_client = "http://wbdv-sp21-final-p-client-react.herokuapp.com"
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin',  remote_client);
     res.header('Access-Control-Allow-Headers',
