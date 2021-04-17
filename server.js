@@ -3,8 +3,9 @@ const app = express()
 
 // TODO: change connected db name
 const mongoose = require('mongoose');
-const uri = "mongodb+srv://jiahao:QE8GMArISSgnWu22@cluster0.whqk6.mongodb.net/final-project?retryWrites=true&w=majority";
-mongoose.connect(uri,
+const local = 'mongodb://localhost:27017/final-project'
+const remote = "mongodb+srv://jiahao:QE8GMArISSgnWu22@cluster0.whqk6.mongodb.net/final-project?retryWrites=true&w=majority";
+mongoose.connect(remote,
     {useNewUrlParser: true, useUnifiedTopology: true});
 
 const session = require('express-session')
