@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-mongoose.connect('mongodb://localhost:27017/final-project',
+mongoose.connect("mongodb+srv://jiahao:QE8GMArISSgnWu22@cluster0.whqk6.mongodb.net/final-project?retryWrites=true&w=majority",
                  {useNewUrlParser: true, useUnifiedTopology: true});
 
 const drinksDAO = require('../daos/drinks-dao')
