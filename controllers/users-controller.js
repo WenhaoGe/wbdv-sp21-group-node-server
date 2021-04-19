@@ -42,8 +42,27 @@ module.exports = (app) => {
         res.sendStatus(200)
     }
 
+    const findUserById = (req, res) => {
+        const Id = req.params.userId
+        usersService.findUserById(Id)
+            .then((user) => {
+                res.send(user)
+            })
+    }
+
+    const findAllUsers = (req, res) => {
+        usersService.findAllUsers()
+            .then((actualUsers) => {
+                res.send(actualUsers)
+            })
+        // res.send(usersService.findAllUsers())
+    }
+
     app.post('/api/register', register)
     app.post('/api/login', login)
     app.post('/api/profile', profile)
     app.post('/api/logout', logout)
+    app.get('/api/users/:userId', findUserById)
+    app.get('/api/users', findAllUsers)
+
 }

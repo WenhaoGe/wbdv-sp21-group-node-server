@@ -19,3 +19,4 @@ module.exports = (app) => {
     app.get('/api/drinks/categories', findDrinksAllCategory)
     app.post('/api/drinks/category', findDrinksByCategory)
 }
+

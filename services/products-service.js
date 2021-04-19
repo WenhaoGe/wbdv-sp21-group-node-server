@@ -8,7 +8,10 @@ const createProduct = (product) => {
     return productsDAO.createProduct(product)
 }
 
+const findAllProduct = () => productsDAO.findAllProducts()
+
 module.exports = {
     findProductsForSeller,
-    createProduct
+    createProduct,
+    findAllProduct
 }

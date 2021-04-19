@@ -8,7 +8,10 @@ const createProduct = (product) => {
     return productsModel.create(product)
 }
 
+const findAllProducts = () => productsModel.find()
+
 module.exports = {
     findProductsForSeller,
-    createProduct
+    createProduct,
+    findAllProducts
 }
