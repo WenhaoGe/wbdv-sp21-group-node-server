@@ -18,5 +18,7 @@ const findDrinksAllCategory = () => {
 
 module.exports = {
     findDrinksByCategory,
-    findDrinksAllCategory
+    findDrinksAllCategory,
+    findAllDrinks,
+    findDrinkById
 }

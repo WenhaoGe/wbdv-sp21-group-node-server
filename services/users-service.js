@@ -55,8 +55,18 @@ const createUser = (user) => {
     return register(user)
 }
 
+const findUserById = (userId) => {
+    return usersDAO.findUserById(userId)
+}
+
+const findAllUsers = () => {
+    return usersDAO.findAllUsers()
+}
+
 module.exports = {
     register,
     createUser,
-    login
+    login,
+    findUserById,
+    findAllUsers
 }

@@ -17,6 +17,14 @@ module.exports = (app) => {
             })
     }
 
+    const findAllProducts = (req, res) => {
+        return productsService.findAllProduct()
+            .then((response) => {
+                res.send(response)
+            })
+    }
+
     app.get('/api/products/:sellerId', findProductsForSeller)
     app.post('/api/products', createProduct)
+    app.get('/api/products', findAllProducts)
 }
