@@ -19,10 +19,11 @@ const findUserById = (userId) => {
     return usersModel.findById(userId)
 }
 
-// For sllers
+// For Sellers
 const findSellerByStoreName = (storeName) => {
     return usersModel.findOne({storeName})
 }
+
 
 module.exports = {
     createUser,
