@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const productSchema = require("../products/products-schema")
 
 const usersSchema = mongoose.Schema({
     // _id is automatically generated
@@ -30,8 +31,9 @@ const usersSchema = mongoose.Schema({
     storeName: String,
     // for admins
     title: String,
-    authority: String // [READ, WRITE, ALL]? or enum: [] you can choose and update
+    authority: String, // [READ, WRITE, ALL]? or enum: [] you can choose and update
     // for buyers
+    shoppingCart: [{product: productSchema, quantity: Number}]
 }, {collection: "users"})
 
 module.exports = usersSchema
