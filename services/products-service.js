@@ -10,8 +10,14 @@ const createProduct = (product) => {
 
 const findAllProduct = () => productsDAO.findAllProducts()
 
+const updateProduct = (productId, product) => productsDAO.updateProduct(productId, product)
+
+const deleteProduct = (productId) => productsDAO.deleteProduct(productId)
+
 module.exports = {
     findProductsForSeller,
     createProduct,
-    findAllProduct
+    findAllProduct,
+    updateProduct,
+    deleteProduct
 }
