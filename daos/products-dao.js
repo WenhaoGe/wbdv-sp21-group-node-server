@@ -20,10 +20,18 @@ const deleteProduct = (productId) => {
     return productsModel.deleteOne({_id: mongoose.Types.ObjectId(productId)})
 }
 
+const findProductsByDrink = (idDrink) =>
+    productsModel.find({"drink.idDrink" : idDrink}).populate("seller")
+
+const findAllStores = () =>
+    productsModel.find().populate("seller")
+
 module.exports = {
     findProductsForSeller,
     createProduct,
     findAllProducts,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    findProductsByDrink,
+    findAllStores
 }
