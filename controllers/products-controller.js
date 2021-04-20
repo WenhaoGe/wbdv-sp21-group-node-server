@@ -41,9 +41,26 @@ module.exports = (app) => {
             })
     }
 
+    const findProductsByDrink = (req, res) => {
+        const idDrink = req.params.idDrink
+        productsService.findProductsByDrink(idDrink)
+            .then((products) => {
+                res.json(products)
+            })
+    }
+
+    const findAllStores = (req, res) => {
+        productsService.findAllStores()
+            .then(stores => {
+                res.json(stores)
+            })
+    }
+
     app.get('/api/products/:sellerId', findProductsForSeller)
     app.post('/api/products', createProduct)
     app.get('/api/products', findAllProducts)
     app.put('/api/products/:productId', updateProduct)
     app.delete('/api/products/:productId', deleteProduct)
+    app.get('/api/drink/:idDrink/products/', findProductsByDrink)
+    app.get('/api/products/stores', findAllStores)
 }
