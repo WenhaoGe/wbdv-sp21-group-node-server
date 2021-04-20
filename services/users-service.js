@@ -13,6 +13,7 @@ const createUserByRole = (newUser) => {
         case 'Buyer':
             const newBuyer = {
                 ...newUser,
+                shoppingCart: []
             }
             return usersDAO.createUser(newBuyer)
         case 'Seller':
