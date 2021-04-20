@@ -1,4 +1,5 @@
 const usersModel = require("../db/users/users-model")
+const mongoose = require("mongoose")
 
 const createUser = (newUser) => {
     return usersModel.create(newUser)
@@ -24,6 +25,17 @@ const findSellerByStoreName = (storeName) => {
     return usersModel.findOne({storeName})
 }
 
+// For Buyers
+
+const findBuyerShoppingCart = (buyerId) => {
+    return usersModel.findById(buyerId).select("shoppingCart")
+}
+
+const cleanShoppingCart = (buyerId) => {
+    return usersModel.updateOne({_id: mongoose.Types.ObjectId(buyerId)},
+                                {$set:{shoppingCart: []}})
+}
+
 
 module.exports = {
     createUser,
@@ -31,5 +43,7 @@ module.exports = {
     findUserByCredentials,
     findAllUsers,
     findUserById,
-    findSellerByStoreName
+    findSellerByStoreName,
+    findBuyerShoppingCart,
+    cleanShoppingCart
 }
