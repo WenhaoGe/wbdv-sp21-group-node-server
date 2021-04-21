@@ -31,6 +31,7 @@ module.exports = (app) => {
     const profile = (req, res) => {
         const currentUser = req.session["currentUser"]
         if (currentUser) {
+            console.log(currentUser)
             res.send(currentUser)
         } else {
             res.sendStatus(403)
@@ -58,11 +59,32 @@ module.exports = (app) => {
         // res.send(usersService.findAllUsers())
     }
 
+    // for Buyer
+    const updateBuyerShoppingCart = (req, res) => {
+        const shoppingCart = req.body
+        const buyerId = req.params.buyerId
+        usersService.updateBuyerShoppingCart(buyerId, shoppingCart)
+            .then((status)=> {
+                res.send(status)
+            })
+    }
+
+    const findBuyerShoppingCart = (req, res) => {
+        const buyerId = req.params.buyerId
+        usersService.findBuyerShoppingCart(buyerId)
+            .then((shoppingCart) => {
+                res.json(shoppingCart)
+            })
+    }
+
     app.post('/api/register', register)
     app.post('/api/login', login)
     app.post('/api/profile', profile)
     app.post('/api/logout', logout)
     app.get('/api/users/:userId', findUserById)
     app.get('/api/users', findAllUsers)
+
+    app.post('/api/buyer/:buyerId/shoppingCart', updateBuyerShoppingCart)
+    app.get('/api/buyer/:buyerId/shoppingCart', findBuyerShoppingCart)
 
 }

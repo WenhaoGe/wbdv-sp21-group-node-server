@@ -13,7 +13,7 @@ const createUserByRole = (newUser) => {
         case 'Buyer':
             const newBuyer = {
                 ...newUser,
-                shoppingCart: []
+                shoppingCart: { totalPrice: 0, items:[]}
             }
             return usersDAO.createUser(newBuyer)
         case 'Seller':
@@ -77,10 +77,18 @@ const findAllUsers = () => {
     return usersDAO.findAllUsers()
 }
 
+const updateBuyerShoppingCart = (buyerId, shoppingCart) =>
+    usersDAO.updateBuyerShoppingCart(buyerId, shoppingCart)
+
+const findBuyerShoppingCart = (buyerId) =>
+    usersDAO.findBuyerShoppingCart(buyerId)
+
 module.exports = {
     register,
     createUser,
     login,
     findUserById,
-    findAllUsers
+    findAllUsers,
+    updateBuyerShoppingCart,
+    findBuyerShoppingCart
 }

@@ -27,13 +27,19 @@ const findSellerByStoreName = (storeName) => {
 
 // For Buyers
 
+const updateBuyerShoppingCart = (buyerId, shoppingCart) => {
+    return usersModel.updateOne({_id: mongoose.Types.ObjectId(buyerId)},
+                                {$set: {shoppingCart: shoppingCart}})
+}
+
 const findBuyerShoppingCart = (buyerId) => {
     return usersModel.findById(buyerId).select("shoppingCart")
+        .populate('shoppingCart.items.product.seller', 'storeName', 'UsersModel')
 }
 
 const cleanShoppingCart = (buyerId) => {
     return usersModel.updateOne({_id: mongoose.Types.ObjectId(buyerId)},
-                                {$set:{shoppingCart: []}})
+                                {$set:{shoppingCart: {totalPrice: 0, items: []}}})
 }
 
 
@@ -45,5 +51,6 @@ module.exports = {
     findUserById,
     findSellerByStoreName,
     findBuyerShoppingCart,
-    cleanShoppingCart
+    cleanShoppingCart,
+    updateBuyerShoppingCart
 }

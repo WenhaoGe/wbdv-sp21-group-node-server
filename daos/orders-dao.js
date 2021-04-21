@@ -12,7 +12,7 @@ const finishCurrentOrder = (buyerId) => {
     let enoughQuantity = true
     usersDAO.findBuyerShoppingCart(buyerId)
         .then((shoppingCart) => {
-            let shoppingProductPairs = shoppingCart.products
+            let shoppingProductPairs = shoppingCart.items
             shoppingProductPairs.forEach((pair) => {
                 enoughQuantity = enoughQuantity && (pair.product.quantity - pair.quantity >= 0)
             })
