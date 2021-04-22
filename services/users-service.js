@@ -13,6 +13,7 @@ const createUserByRole = (newUser) => {
         case 'Buyer':
             const newBuyer = {
                 ...newUser,
+                shoppingCart: []
             }
             return usersDAO.createUser(newBuyer)
         case 'Seller':
@@ -36,15 +37,28 @@ const createUserByRole = (newUser) => {
 // implement logic here
 const register = (newUser) => {
     console.log(newUser)
-    return usersDAO.findUserByUsername(newUser.username)
-        .catch(error => console.log(error))
-        .then((existingUser) => {
-            if (existingUser) {
+    if (newUser.role === "Seller") {
+        return usersDAO.findSellerByStoreName(newUser.storeName)
+            .then((existingSeller => {
+                if (existingSeller) {
+                    if (existingSeller.name === newUser.name) {
 
-            } else {
-                return createUserByRole(newUser)
-            }
-        })
+                    }
+                } else {
+                    return createUserByRole(newUser)
+                }
+            }))
+    } else {
+        return usersDAO.findUserByUsername(newUser.username)
+            .catch(error => console.log(error))
+            .then((existingUser) => {
+                if (existingUser) {
+
+                } else {
+                    return createUserByRole(newUser)
+                }
+            })
+    }
 }
 
 const login = (credentials) => {

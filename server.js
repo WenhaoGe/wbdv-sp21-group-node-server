@@ -5,6 +5,11 @@ const app = express()
 const mongoose = require('mongoose');
 const local = 'mongodb://localhost:27017/final-project'
 const remote = "mongodb+srv://jiahao:QE8GMArISSgnWu22@cluster0.whqk6.mongodb.net/final-project?retryWrites=true&w=majority";
+
+// const remote = "mongodb+srv://:@cluster0.whqk6.mongodb.net/final-project?retryWrites=true&w=majority";
+
+require('dotenv').config();
+const MONGODB_URI = process.env.MONGODB_URI
 mongoose.connect(remote,
     {useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -20,7 +25,7 @@ app.use(session({
 const local_client = 'http://localhost:3000'
 const remote_client = "http://wbdv-sp21-final-p-client-react.herokuapp.com"
 app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin',  remote_client);
+    res.header('Access-Control-Allow-Origin', local_client);
     res.header('Access-Control-Allow-Headers',
         'Content-Type, X-Requested-With, Origin');
     res.header('Access-Control-Allow-Methods',
@@ -40,4 +45,4 @@ require("./controllers/users-controller")(app)
 require("./controllers/drinks-controller")(app)
 require("./controllers/products-controller")(app)
 
-app.listen(4000)
+app.listen(process.env.PORT || 4000)

@@ -16,9 +16,14 @@ const findDrinksAllCategory = () => {
     return drinksDAO.findDrinksAllCategory()
 }
 
+const findDrinkByName = (name) => {
+    return drinksDAO.findDrinkByName(name)
+}
+
 module.exports = {
     findDrinksByCategory,
     findDrinksAllCategory,
     findAllDrinks,
-    findDrinkById
+    findDrinkById,
+    findDrinkByName
 }
