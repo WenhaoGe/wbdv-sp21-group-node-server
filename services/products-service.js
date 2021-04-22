@@ -9,6 +9,9 @@ const createProduct = (product) => {
 }
 
 const findAllProduct = () => productsDAO.findAllProducts()
+    .populate("seller", "names storeName")
+    .populate("drink")
+    .exec()
 
 const updateProduct = (productId, product) => productsDAO.updateProduct(productId, product)
 
