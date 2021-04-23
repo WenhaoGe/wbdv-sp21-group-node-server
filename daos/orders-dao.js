@@ -12,7 +12,6 @@ const finishCurrentOrder = (buyerId) => {
     return usersDAO.findBuyerShoppingCart(buyerId)
         .then((shoppingCart) => {
             let shoppingProductPairs = shoppingCart.shoppingCart.items
-            console.log(shoppingCart)
             shoppingProductPairs.forEach((pair) => {
                 enoughQuantity = enoughQuantity && (pair.product.quantity - pair.quantity >= 0)
             })
@@ -23,11 +22,13 @@ const finishCurrentOrder = (buyerId) => {
                     productsDAO.updateProduct(product._id, product)
                         .then(() => {
                             let revenue = product.price * pair.quantity
-                            usersDAO.updateSellerRevenue(product.seller._id, revenue).then()
+                            // console.log(pair.quantity, " and ", product.price, ' and ', revenue)
+                            usersDAO.updateSellerRevenue(product.seller._id, revenue)
                         })
                 })
                 let newOrder = {
-                    products: shoppingCart,
+                    products: shoppingCart.shoppingCart.items,
+                    totalPrice: shoppingCart.totalPrice,
                     finishDate: new Date(),
                     buyer: buyerId
                 }

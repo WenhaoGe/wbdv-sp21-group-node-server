@@ -27,10 +27,11 @@ const findSellerByStoreName = (storeName) => {
 
 const updateSellerRevenue = (sellerId, revenue) => {
     const sellerOBJId = mongoose.Types.ObjectId(sellerId)
-    return usersModel.findOne({_id: sellerOBJId}).select('revenue').then((preRevenue) => {
+     usersModel.findOne({_id: sellerOBJId}).select('revenue').then((preRevenue) => {
         let prevRevValue = preRevenue.revenue
-        usersModel.updateOne({_id: sellerOBJId}, {$set: {revenue: revenue + prevRevValue}})
-
+        let newRev = prevRevValue + revenue
+         // console.log("prev is ", prevRevValue, " new is ", newRev)
+        usersModel.updateOne({_id: sellerOBJId}, {$set: {revenue: newRev}}).exec()
     })
     // return usersModel.updateOne({_id: mongoose.Types.ObjectId(sellerId)},
     //                             {$set: {revenue: revenue}})

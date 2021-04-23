@@ -36,7 +36,7 @@ const createUserByRole = (newUser) => {
 
 // implement logic here
 const register = (newUser) => {
-    console.log(newUser)
+    // console.log(newUser)
     if (newUser.role === "Seller") {
         return usersDAO.findSellerByStoreName(newUser.storeName)
             .then((existingSeller => {

@@ -47,7 +47,20 @@ const findProductsByDrink = (idDrink) =>
                                 {'$unwind': '$seller'},])
 
 const findAllStores = () =>
-    productsModel.find().populate("seller")
+    productsModel.aggregate([
+                                {
+                                    $group: {
+                                        _id: '$seller'
+                                    }
+                                },
+                                {
+                                    '$lookup': {
+                                        'from': 'users',
+                                        'localField': '_id',
+                                        'foreignField': '_id',
+                                        'as': 'seller'
+                                    }
+                                }])
 
 module.exports = {
     findProductsForSeller,

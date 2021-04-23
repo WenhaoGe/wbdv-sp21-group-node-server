@@ -10,7 +10,7 @@ module.exports = (app) => {
 
     const findDrinksByCategory = (req, res) => {
         const category = req.params.category
-        console.log(category)
+        // console.log(category)
         drinksService.findDrinksByCategory(category)
             .then((drinks) => {
                 res.send(drinks)
@@ -19,7 +19,7 @@ module.exports = (app) => {
 
     const findDrinksByCategoryForSeller = (req, res) => {
         const category = req.params.category
-        console.log(category)
+        // console.log(category)
         drinksService.findDrinksByCategoryForSeller(category)
             .then((drinks) => {
                 res.send(drinks)
