@@ -10,7 +10,7 @@ const remote = "mongodb+srv://jiahao:QE8GMArISSgnWu22@cluster0.whqk6.mongodb.net
 
 require('dotenv').config();
 const MONGODB_URI = process.env.MONGODB_URI
-mongoose.connect(remote,
+mongoose.connect(MONGODB_URI,
     {useNewUrlParser: true, useUnifiedTopology: true});
 
 const session = require('express-session')
