@@ -21,7 +21,7 @@ const updateProduct = (productId, product) => productsDAO.updateProduct(productI
 const deleteProduct = (productId) => productsDAO.deleteProduct(productId)
 
 const findProductsByDrink = (idDrink) =>
-    productsDAO.findProductsByDrink(idDrink)
+    productsDAO.findProductsByDrink(idDrink).populate("drink").populate("seller")
 
 const findAllStores = () =>
     productsDAO.findAllStores()

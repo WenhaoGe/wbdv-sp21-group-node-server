@@ -35,6 +35,7 @@ const updateBuyerShoppingCart = (buyerId, shoppingCart) => {
 const findBuyerShoppingCart = (buyerId) => {
     return usersModel.findById(buyerId).select("shoppingCart")
         .populate('shoppingCart.items.product.seller', 'storeName', 'UsersModel')
+        .populate('shoppingCart.items.product.drink', '','DrinksModel')
 }
 
 const cleanShoppingCart = (buyerId) => {
