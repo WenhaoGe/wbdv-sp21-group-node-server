@@ -8,6 +8,6 @@ const ordersSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'UsersModel'
     }
-}, {collection : 'Products'})
+}, {collection : 'orders'})
 
 module.exports = ordersSchema

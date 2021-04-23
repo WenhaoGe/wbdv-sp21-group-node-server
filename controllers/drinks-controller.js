@@ -9,14 +9,34 @@ module.exports = (app) => {
     }
 
     const findDrinksByCategory = (req, res) => {
-        const category = req.body
-        drinksService.findDrinksByCategory(category.category)
+        const category = req.params.category
+        console.log(category)
+        drinksService.findDrinksByCategory(category)
             .then((drinks) => {
                 res.send(drinks)
             })
     }
 
+    const findDrinksByCategoryForSeller = (req, res) => {
+        const category = req.params.category
+        console.log(category)
+        drinksService.findDrinksByCategoryForSeller(category)
+            .then((drinks) => {
+                res.send(drinks)
+            })
+    }
+
+    const findDrinkByName = (req, res) => {
+        const drinkName = req.params.drinkName
+        drinksService.findDrinkByName(drinkName)
+            .then((drink) => {
+                res.send(drink)
+            })
+    }
+
     app.get('/api/drinks/categories', findDrinksAllCategory)
-    app.post('/api/drinks/category', findDrinksByCategory)
+    app.get('/api/drinks/categories/:category', findDrinksByCategory)
+    app.get('/api/drinks/categories/:category/Seller', findDrinksByCategoryForSeller)
+    app.get('/api/drink/:drinkName', findDrinkByName)
 }
 

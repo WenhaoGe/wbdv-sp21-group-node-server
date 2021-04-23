@@ -1,14 +1,25 @@
 const productsDAO = require("../daos/products-dao")
 
 const findProductsForSeller = (seller) => {
+
     return productsDAO.findProductsForSeller(seller).populate('drink')
+
+    return productsDAO.findProductsForSeller(seller)
+
+    return productsDAO.findProductsForSeller(seller)
+        .populate("drink")
 }
 
 const createProduct = (product) => {
     return productsDAO.createProduct(product)
+        .then((created)=> created.populate("drink").execPopulate())
 }
 
 const findAllProduct = () => productsDAO.findAllProducts()
+    .populate("seller", "names storeName")
+    .populate("drink")
+    .exec()
+
 
 const updateProduct = (productId, product) => productsDAO.updateProduct(productId, product)
 

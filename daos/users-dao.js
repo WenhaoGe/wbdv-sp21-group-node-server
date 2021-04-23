@@ -25,6 +25,17 @@ const findSellerByStoreName = (storeName) => {
     return usersModel.findOne({storeName})
 }
 
+const updateSellerRevenue = (sellerId, revenue) => {
+    const sellerOBJId = mongoose.Types.ObjectId(sellerId)
+    return usersModel.findOne({_id: sellerOBJId}).select('revenue').then((preRevenue) => {
+        let prevRevValue = preRevenue.revenue
+        usersModel.updateOne({_id: sellerOBJId}, {$set: {revenue: revenue + prevRevValue}})
+
+    })
+    // return usersModel.updateOne({_id: mongoose.Types.ObjectId(sellerId)},
+    //                             {$set: {revenue: revenue}})
+}
+
 // For Buyers
 
 const updateBuyerShoppingCart = (buyerId, shoppingCart) => {
@@ -35,6 +46,7 @@ const updateBuyerShoppingCart = (buyerId, shoppingCart) => {
 const findBuyerShoppingCart = (buyerId) => {
     return usersModel.findById(buyerId).select("shoppingCart")
         .populate('shoppingCart.items.product.seller', 'storeName', 'UsersModel')
+        .populate('shoppingCart.items.product.drink', '','DrinksModel')
 }
 
 const cleanShoppingCart = (buyerId) => {
@@ -52,5 +64,6 @@ module.exports = {
     findSellerByStoreName,
     findBuyerShoppingCart,
     cleanShoppingCart,
-    updateBuyerShoppingCart
+    updateBuyerShoppingCart,
+    updateSellerRevenue
 }

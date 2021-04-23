@@ -29,6 +29,7 @@ const usersSchema = mongoose.Schema({
         country: String
     },
     storeName: String,
+    revenue: Number,
     // for admins
     title: String,
     authority: String, // [READ, WRITE, ALL]? or enum: [] you can choose and update

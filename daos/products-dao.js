@@ -19,7 +19,30 @@ const deleteProduct = (productId) => {
 }
 
 const findProductsByDrink = (idDrink) =>
-    productsModel.find({"drink.idDrink" : idDrink}).populate("seller")
+    productsModel.aggregate([
+                                {
+                                    '$lookup': {
+                                        'from': 'drinks',
+                                        'localField': 'drink',
+                                        'foreignField': '_id',
+                                        'as': 'drink'
+                                    }
+                                },
+                                {
+                                    '$match': {
+                                        'drink.idDrink': idDrink
+                                    }
+                                },
+                                {'$unwind': '$drink'},
+                                {
+                                    '$lookup': {
+                                        'from': 'users',
+                                        'localField': 'seller',
+                                        'foreignField': '_id',
+                                        'as': 'seller'
+                                    }
+                                },
+                                {'$unwind': '$seller'},])
 
 const findAllStores = () =>
     productsModel.find().populate("seller")
