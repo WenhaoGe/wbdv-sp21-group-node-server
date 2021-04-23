@@ -36,6 +36,10 @@ const cleanShoppingCart = (buyerId) => {
                                 {$set:{shoppingCart: []}})
 }
 
+const updateBuyerShoppingCart = (buyerId, shoppingCart) => {
+    return usersModel.updateOne({_id: mongoose.Types.ObjectId(buyerId)},
+                                {$set: {shoppingCart: shoppingCart}})
+}
 
 module.exports = {
     createUser,
@@ -45,5 +49,6 @@ module.exports = {
     findUserById,
     findSellerByStoreName,
     findBuyerShoppingCart,
-    cleanShoppingCart
+    cleanShoppingCart,
+    updateBuyerShoppingCart
 }

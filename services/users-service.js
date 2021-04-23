@@ -77,10 +77,19 @@ const findAllUsers = () => {
     return usersDAO.findAllUsers()
 }
 
+const updateBuyerShoppingCart = (buyerId, shoppingCart) =>
+    usersDAO.updateBuyerShoppingCart(buyerId, shoppingCart)
+
+const findBuyerShoppingCart = (buyerId) =>
+    usersDAO.findBuyerShoppingCart(buyerId)
+
+
 module.exports = {
     register,
     createUser,
     login,
     findUserById,
-    findAllUsers
+    findAllUsers,
+    updateBuyerShoppingCart,
+    findBuyerShoppingCart
 }
