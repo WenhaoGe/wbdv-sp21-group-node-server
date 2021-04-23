@@ -44,5 +44,6 @@ app.use(bodyParser.urlencoded({
 require("./controllers/users-controller")(app)
 require("./controllers/drinks-controller")(app)
 require("./controllers/products-controller")(app)
+require("./controllers/order-controller")(app)
 
 app.listen(process.env.PORT || 4000)
