@@ -9,8 +9,6 @@ const createProduct = (product) => {
     return productsModel.create(product)
 }
 
-const findAllProducts = () => productsModel.find()
-
 const updateProduct = (productId, product) => {
     return productsModel.updateOne({_id: mongoose.Types.ObjectId(productId)},
                                    {$set: {quantity: product.quantity, price: product.price}})
@@ -25,6 +23,9 @@ const findProductsByDrink = (idDrink) =>
 
 const findAllStores = () =>
     productsModel.find().populate("seller")
+
+const findAllProducts = () =>
+    productsModel.find().populate("drink").populate("seller")
 
 module.exports = {
     findProductsForSeller,

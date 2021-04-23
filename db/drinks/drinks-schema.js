@@ -10,3 +10,4 @@ const drinksSchema = mongoose.Schema({
                                      }, {collection: "drinks"})
 
 module.exports = drinksSchema
+

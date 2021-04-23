@@ -19,8 +19,8 @@ module.exports = (app) => {
 
     const findAllProducts = (req, res) => {
         return productsService.findAllProduct()
-            .then((response) => {
-                res.json(response)
+            .then((products) => {
+                res.json(products)
             })
     }
 
