@@ -6,8 +6,8 @@ const productsSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'DrinksModel'
     },
-    quantity: String,
-    price: String,
+    quantity: Number,
+    price: Number,
     seller: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'UsersModel'
