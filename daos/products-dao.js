@@ -60,6 +60,12 @@ const findAllStores = () =>
                                         'foreignField': '_id',
                                         'as': 'seller'
                                     }
+                                },
+                                {'$unwind': '$seller'},
+                                {
+                                    $sort: {
+                                        'seller.storeName': 1
+                                    }
                                 }])
 
 module.exports = {

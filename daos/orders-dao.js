@@ -4,7 +4,9 @@ const productsDAO = require("../daos/products-dao")
 const usersDAO = require("../daos/users-dao")
 
 const findOrdersByBuyerId = (buyerId) => {
-    return ordersModel.find({"_id" : buyerId})
+    return ordersModel.find({"buyer" : buyerId})
+        .populate("products.product.drink")
+        .populate('products.product.seller')
 }
 
 const finishCurrentOrder = (buyerId) => {
@@ -28,7 +30,7 @@ const finishCurrentOrder = (buyerId) => {
                 })
                 let newOrder = {
                     products: shoppingCart.shoppingCart.items,
-                    totalPrice: shoppingCart.totalPrice,
+                    totalPrice: shoppingCart.shoppingCart.totalPrice,
                     finishDate: new Date(),
                     buyer: buyerId
                 }
