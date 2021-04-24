@@ -99,7 +99,21 @@ module.exports = (app) => {
         } else {
             res.sendStatus(403)
         }
+    }
 
+    const findPublicProfileById = (req, res) => {
+        const userId = req.params.userId
+        const currentUser = req.session["currentUser"]
+        if (!currentUser || currentUser._id !== userId) {
+            usersService.findUserById(userId)
+                .then(user => {
+                    const picked = (({names, username, role, address}) => ({names, username, role, address}))(user);
+                    res.send(picked);
+                })
+
+        } else {
+            res.sendStatus(403)
+        }
     }
 
     app.post('/api/register', register)
@@ -109,6 +123,7 @@ module.exports = (app) => {
     app.post('/api/logout', logout)
     app.get('/api/users/:userId', findUserById)
     app.get('/api/users/role/:role', findUsersByRole)
+    app.get('/api/profile/:userId', findPublicProfileById)
     app.get('/api/users', findAllUsers)
     app.post('/api/buyer/:buyerId/shoppingCart', updateBuyerShoppingCart)
     app.get('/api/buyer/:buyerId/shoppingCart', findBuyerShoppingCart)

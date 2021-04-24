@@ -28,6 +28,7 @@ const updateUserInfo = (userId, userInfo) => {
     return usersModel.updateOne({_id: mongoose.Types.ObjectId(userId)}, {$set: userInfo})
 }
 
+
 // For Sellers
 const findSellerByStoreName = (storeName) => {
     return usersModel.findOne({storeName})
@@ -62,6 +63,7 @@ const cleanShoppingCart = (buyerId) => {
     return usersModel.updateOne({_id: mongoose.Types.ObjectId(buyerId)},
                                 {$set:{shoppingCart: {totalPrice: 0, items: []}}})
 }
+
 
 
 module.exports = {

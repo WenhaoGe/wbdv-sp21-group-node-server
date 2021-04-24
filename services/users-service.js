@@ -98,5 +98,5 @@ module.exports = {
     findAllUsers,
     updateBuyerShoppingCart,
     findBuyerShoppingCart,
-    updateUserInfo
+    updateUserInfo,
 }
