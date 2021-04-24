@@ -83,6 +83,9 @@ const updateBuyerShoppingCart = (buyerId, shoppingCart) =>
 const findBuyerShoppingCart = (buyerId) =>
     usersDAO.findBuyerShoppingCart(buyerId)
 
+const updateUserInfo = (userId, userInfo) =>
+    usersDAO.updateUserInfo(userId, userInfo)
+
 module.exports = {
     register,
     createUser,
@@ -90,5 +93,6 @@ module.exports = {
     findUserById,
     findAllUsers,
     updateBuyerShoppingCart,
-    findBuyerShoppingCart
+    findBuyerShoppingCart,
+    updateUserInfo
 }

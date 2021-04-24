@@ -20,6 +20,10 @@ const findUserById = (userId) => {
     return usersModel.findById(userId)
 }
 
+const updateUserInfo = (userId, userInfo) => {
+    return usersModel.updateOne({_id: mongoose.Types.ObjectId(userId)}, {$set: userInfo})
+}
+
 // For Sellers
 const findSellerByStoreName = (storeName) => {
     return usersModel.findOne({storeName})
@@ -66,5 +70,6 @@ module.exports = {
     findBuyerShoppingCart,
     cleanShoppingCart,
     updateBuyerShoppingCart,
-    updateSellerRevenue
+    updateSellerRevenue,
+    updateUserInfo
 }
