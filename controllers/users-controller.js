@@ -100,7 +100,17 @@ module.exports = (app) => {
             res.sendStatus(403)
         }
     }
+    const updateUserInfoWithWriteAuth = (req, res) => {
+        const receive = req.body
+        const userId = receive.userId
+        const userInfo = receive.userProfile
 
+        usersService.updateUserInfo(userId, userInfo)
+            .then((updatedProfile)=> {
+                res.json(updatedProfile)
+            })
+
+    }
     const findPublicProfileById = (req, res) => {
         const userId = req.params.userId
         const currentUser = req.session["currentUser"]
@@ -120,6 +130,7 @@ module.exports = (app) => {
     app.post('/api/login', login)
     app.post('/api/profile', profile)
     app.put('/api/profile', updateUserInfo)
+    app.put('/api/profile/write-auth', updateUserInfoWithWriteAuth)
     app.post('/api/logout', logout)
     app.get('/api/users/:userId', findUserById)
     app.get('/api/users/role/:role', findUsersByRole)
@@ -127,5 +138,5 @@ module.exports = (app) => {
     app.get('/api/users', findAllUsers)
     app.post('/api/buyer/:buyerId/shoppingCart', updateBuyerShoppingCart)
     app.get('/api/buyer/:buyerId/shoppingCart', findBuyerShoppingCart)
-
+    app.put
 }
