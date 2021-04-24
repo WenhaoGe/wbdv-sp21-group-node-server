@@ -36,7 +36,7 @@ const finishCurrentOrder = (buyerId) => {
                 }
                 return ordersModel.create(newOrder).then(()=>usersDAO.cleanShoppingCart(buyerId))
             } else {
-                throw error("Not enough quantity")
+                throw "Not enough quantity"
             }
         })
 }
