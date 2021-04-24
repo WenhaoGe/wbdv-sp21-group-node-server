@@ -16,6 +16,10 @@ const findAllUsers = () => {
     return usersModel.find()
 }
 
+const findUsersByRole = (myRole) => {
+    return usersModel.find({role: myRole})
+}
+
 const findUserById = (userId) => {
     return usersModel.findById(userId)
 }
@@ -66,6 +70,7 @@ module.exports = {
     findUserByCredentials,
     findAllUsers,
     findUserById,
+    findUsersByRole,
     findSellerByStoreName,
     findBuyerShoppingCart,
     cleanShoppingCart,

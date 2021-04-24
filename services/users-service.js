@@ -76,6 +76,9 @@ const findUserById = (userId) => {
 const findAllUsers = () => {
     return usersDAO.findAllUsers()
 }
+const findUsersByRole = (role) => {
+    return usersDAO.findUsersByRole(role)
+}
 
 const updateBuyerShoppingCart = (buyerId, shoppingCart) =>
     usersDAO.updateBuyerShoppingCart(buyerId, shoppingCart)
@@ -91,6 +94,7 @@ module.exports = {
     createUser,
     login,
     findUserById,
+    findUsersByRole,
     findAllUsers,
     updateBuyerShoppingCart,
     findBuyerShoppingCart,
