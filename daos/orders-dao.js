@@ -25,7 +25,9 @@ const finishCurrentOrder = (buyerId) => {
                         .then(() => {
                             let revenue = product.price * pair.quantity
                             // console.log(pair.quantity, " and ", product.price, ' and ', revenue)
-                            usersDAO.updateSellerRevenue(product.seller._id, revenue)
+                            // console.log(product.seller._id)
+                            usersDAO.updateSellerRevenue(product.seller._id, revenue).exec()
+                                // .then((res) => console.log(res))
                         })
                 })
                 let newOrder = {
