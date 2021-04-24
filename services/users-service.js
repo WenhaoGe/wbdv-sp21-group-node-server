@@ -21,7 +21,8 @@ const createUserByRole = (newUser) => {
             const newSeller = {
                 ...newUser,
                 storageLocation: newUser.storageLocation,
-                storeName: newUser.storeName
+                storeName: newUser.storeName,
+                revenue: 0
             }
             return usersDAO.findSellerByStoreName(newUser.storeName).
                 then((found) => {
