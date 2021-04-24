@@ -16,6 +16,10 @@ const findAllUsers = () => {
     return usersModel.find()
 }
 
+const findUsersByRole = (myRole) => {
+    return usersModel.find({role: myRole})
+}
+
 const findUserById = (userId) => {
     return usersModel.findById(userId)
 }
@@ -23,6 +27,7 @@ const findUserById = (userId) => {
 const updateUserInfo = (userId, userInfo) => {
     return usersModel.updateOne({_id: mongoose.Types.ObjectId(userId)}, {$set: userInfo})
 }
+
 
 // For Sellers
 const findSellerByStoreName = (storeName) => {
@@ -60,12 +65,14 @@ const cleanShoppingCart = (buyerId) => {
 }
 
 
+
 module.exports = {
     createUser,
     findUserByUsername,
     findUserByCredentials,
     findAllUsers,
     findUserById,
+    findUsersByRole,
     findSellerByStoreName,
     findBuyerShoppingCart,
     cleanShoppingCart,
