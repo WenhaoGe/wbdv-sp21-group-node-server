@@ -12,6 +12,10 @@ const findDrinksByCategory = (category) => {
     return drinksDAO.findDrinksByCategory(category)
 }
 
+const findDrinksByCategoryForSeller = (category) => {
+    return drinksDAO.findDrinksByCategory(category).select("_id nameDrink")
+}
+
 const findDrinksAllCategory = () => {
     return drinksDAO.findDrinksAllCategory()
 }
@@ -25,5 +29,6 @@ module.exports = {
     findDrinksAllCategory,
     findAllDrinks,
     findDrinkById,
-    findDrinkByName
+    findDrinkByName,
+    findDrinksByCategoryForSeller
 }

@@ -4,27 +4,39 @@ const productsDAO = require("../daos/products-dao")
 const usersDAO = require("../daos/users-dao")
 
 const findOrdersByBuyerId = (buyerId) => {
-    return ordersModel.find({"buyer._id" : buyerId})
+    return ordersModel.find({"buyer" : buyerId})
+        .populate("products.product.drink")
+        .populate('products.product.seller')
 }
-
 
 const finishCurrentOrder = (buyerId) => {
     let enoughQuantity = true
-    usersDAO.findBuyerShoppingCart(buyerId)
+    return usersDAO.findBuyerShoppingCart(buyerId)
         .then((shoppingCart) => {
-            let shoppingProductPairs = shoppingCart.products
+            let shoppingProductPairs = shoppingCart.shoppingCart.items
             shoppingProductPairs.forEach((pair) => {
                 enoughQuantity = enoughQuantity && (pair.product.quantity - pair.quantity >= 0)
             })
             if (enoughQuantity) {
-                shoppingProductPairs.forEach((pair) => {
+                shoppingProductPairs.forEach((pair, index) => {
                     let product = pair.product
                     product.quantity -= pair.quantity
                     productsDAO.updateProduct(product._id, product)
+                        .then(() => {
+                            let revenue = product.price * pair.quantity
+                            // console.log(pair.quantity, " and ", product.price, ' and ', revenue)
+                            usersDAO.updateSellerRevenue(product.seller._id, revenue)
+                        })
                 })
-                return usersDAO.cleanShoppingCart(buyerId)
+                let newOrder = {
+                    products: shoppingCart.shoppingCart.items,
+                    totalPrice: shoppingCart.shoppingCart.totalPrice,
+                    finishDate: new Date(),
+                    buyer: buyerId
+                }
+                return ordersModel.create(newOrder).then(()=>usersDAO.cleanShoppingCart(buyerId))
             } else {
-                throw err("Not enough quantity")
+                throw error("Not enough quantity")
             }
         })
 }

@@ -3,14 +3,10 @@ const app = express()
 
 // TODO: change connected db name
 const mongoose = require('mongoose');
-const local = 'mongodb://localhost:27017/final-project'
-const remote = "mongodb+srv://jiahao:QE8GMArISSgnWu22@cluster0.whqk6.mongodb.net/final-project?retryWrites=true&w=majority";
-
-// const remote = "mongodb+srv://:@cluster0.whqk6.mongodb.net/final-project?retryWrites=true&w=majority";
 
 require('dotenv').config();
 const MONGODB_URI = process.env.MONGODB_URI
-mongoose.connect(remote,
+mongoose.connect(MONGODB_URI,
     {useNewUrlParser: true, useUnifiedTopology: true});
 
 const session = require('express-session')
@@ -22,10 +18,10 @@ app.use(session({
 
 
 // configure CORS
-const local_client = 'http://localhost:3000'
-const remote_client = "http://wbdv-sp21-final-p-client-react.herokuapp.com"
+const CLIENT_URL = process.env.CLIENT_URL
+// const remote_client = "http://wbdv-sp21-final-p-client-react.herokuapp.com"
 app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', local_client);
+    res.header('Access-Control-Allow-Origin', CLIENT_URL);
     res.header('Access-Control-Allow-Headers',
         'Content-Type, X-Requested-With, Origin');
     res.header('Access-Control-Allow-Methods',
@@ -44,5 +40,6 @@ app.use(bodyParser.urlencoded({
 require("./controllers/users-controller")(app)
 require("./controllers/drinks-controller")(app)
 require("./controllers/products-controller")(app)
+require("./controllers/order-controller")(app)
 
 app.listen(process.env.PORT || 4000)

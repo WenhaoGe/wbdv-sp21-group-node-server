@@ -22,22 +22,51 @@ const deleteProduct = (productId) => {
 
 const findProductsByDrink = (idDrink) =>
     productsModel.aggregate([
-        {
-            '$lookup': {
-                'from': 'drinks',
-                'localField': 'drink',
-                'foreignField': '_id',
-                'as': 'drink'
-            }
-        }, {
-            '$match': {
-                'drink.idDrink': idDrink
-            }
-        }
-    ])
+                                {
+                                    '$lookup': {
+                                        'from': 'drinks',
+                                        'localField': 'drink',
+                                        'foreignField': '_id',
+                                        'as': 'drink'
+                                    }
+                                },
+                                {
+                                    '$match': {
+                                        'drink.idDrink': idDrink
+                                    }
+                                },
+                                {'$unwind': '$drink'},
+                                {
+                                    '$lookup': {
+                                        'from': 'users',
+                                        'localField': 'seller',
+                                        'foreignField': '_id',
+                                        'as': 'seller'
+                                    }
+                                },
+                                {'$unwind': '$seller'},])
 
 const findAllStores = () =>
-    productsModel.find().populate("seller")
+    productsModel.aggregate([
+                                {
+                                    $group: {
+                                        _id: '$seller'
+                                    }
+                                },
+                                {
+                                    '$lookup': {
+                                        'from': 'users',
+                                        'localField': '_id',
+                                        'foreignField': '_id',
+                                        'as': 'seller'
+                                    }
+                                },
+                                {'$unwind': '$seller'},
+                                {
+                                    $sort: {
+                                        'seller.storeName': 1
+                                    }
+                                }])
 
 module.exports = {
     findProductsForSeller,

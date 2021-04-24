@@ -31,7 +31,12 @@ module.exports = (app) => {
     const profile = (req, res) => {
         const currentUser = req.session["currentUser"]
         if (currentUser) {
-            res.send(currentUser)
+            // console.log(currentUser)
+            const currentUerId = currentUser._id
+            usersService.findUserById(currentUerId).then((profile)=> {
+                res.send(profile)
+            })
+            // res.send(currentUser)
         } else {
             res.sendStatus(403)
         }
@@ -58,11 +63,50 @@ module.exports = (app) => {
         // res.send(usersService.findAllUsers())
     }
 
+    // for Buyer
+    const updateBuyerShoppingCart = (req, res) => {
+        const shoppingCart = req.body
+        const buyerId = req.params.buyerId
+        usersService.updateBuyerShoppingCart(buyerId, shoppingCart)
+            .then((status)=> {
+                res.send(status)
+            })
+    }
+
+    const findBuyerShoppingCart = (req, res) => {
+        const buyerId = req.params.buyerId
+        usersService.findBuyerShoppingCart(buyerId)
+            .then((shoppingCart) => {
+                res.json(shoppingCart)
+            })
+    }
+
+    const updateUserInfo = (req, res) => {
+        const receive = req.body
+        const userId = receive.userId
+        const userInfo = receive.userProfile
+
+        const currentUser = req.session["currentUser"]
+        if (currentUser._id === userId) {
+            usersService.updateUserInfo(userId, userInfo)
+                .then((updatedProfile)=> {
+                    res.json(updatedProfile)
+                })
+        } else {
+            res.sendStatus(403)
+        }
+
+    }
+
     app.post('/api/register', register)
     app.post('/api/login', login)
     app.post('/api/profile', profile)
+    app.put('/api/profile', updateUserInfo)
     app.post('/api/logout', logout)
     app.get('/api/users/:userId', findUserById)
     app.get('/api/users', findAllUsers)
+
+    app.post('/api/buyer/:buyerId/shoppingCart', updateBuyerShoppingCart)
+    app.get('/api/buyer/:buyerId/shoppingCart', findBuyerShoppingCart)
 
 }

@@ -62,5 +62,5 @@ module.exports = (app) => {
     app.put('/api/products/:productId', updateProduct)
     app.delete('/api/products/:productId', deleteProduct)
     app.get('/api/drink/:idDrink/products/', findProductsByDrink)
-    app.get('/api/products/stores', findAllStores)
+    app.get('/api/stores', findAllStores)
 }

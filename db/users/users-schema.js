@@ -29,11 +29,13 @@ const usersSchema = mongoose.Schema({
         country: String
     },
     storeName: String,
+    revenue: Number,
     // for admins
     title: String,
     authority: String, // [READ, WRITE, ALL]? or enum: [] you can choose and update
     // for buyers
-    shoppingCart: [{product: productSchema, quantity: Number}]
+    shoppingCart: { totalPrice: Number, items: [{product: productSchema, quantity: Number}]}
+
 }, {collection: "users"})
 
 module.exports = usersSchema

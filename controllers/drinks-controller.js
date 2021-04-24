@@ -10,12 +10,22 @@ module.exports = (app) => {
 
     const findDrinksByCategory = (req, res) => {
         const category = req.params.category
-        console.log(category)
+        // console.log(category)
         drinksService.findDrinksByCategory(category)
             .then((drinks) => {
                 res.send(drinks)
             })
     }
+
+    const findDrinksByCategoryForSeller = (req, res) => {
+        const category = req.params.category
+        // console.log(category)
+        drinksService.findDrinksByCategoryForSeller(category)
+            .then((drinks) => {
+                res.send(drinks)
+            })
+    }
+
     const findDrinkByName = (req, res) => {
         const drinkName = req.params.drinkName
         drinksService.findDrinkByName(drinkName)
@@ -26,6 +36,7 @@ module.exports = (app) => {
 
     app.get('/api/drinks/categories', findDrinksAllCategory)
     app.get('/api/drinks/categories/:category', findDrinksByCategory)
+    app.get('/api/drinks/categories/:category/Seller', findDrinksByCategoryForSeller)
     app.get('/api/drink/:drinkName', findDrinkByName)
 }
 
