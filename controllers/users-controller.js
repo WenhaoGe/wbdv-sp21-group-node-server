@@ -138,5 +138,4 @@ module.exports = (app) => {
     app.get('/api/users', findAllUsers)
     app.post('/api/buyer/:buyerId/shoppingCart', updateBuyerShoppingCart)
     app.get('/api/buyer/:buyerId/shoppingCart', findBuyerShoppingCart)
-    app.put
 }
