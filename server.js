@@ -42,4 +42,7 @@ require("./controllers/drinks-controller")(app)
 require("./controllers/products-controller")(app)
 require("./controllers/order-controller")(app)
 
+const cors = require('cors');
+app.use(cors({credentials: true, origin: CLIENT_URL}));
+
 app.listen(process.env.PORT || 4000)
