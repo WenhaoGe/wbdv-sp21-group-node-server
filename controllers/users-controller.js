@@ -117,7 +117,8 @@ module.exports = (app) => {
         if (!currentUser || currentUser._id !== userId) {
             usersService.findUserById(userId)
                 .then(user => {
-                    const picked = (({names, username, role, address}) => ({names, username, role, address}))(user);
+                    const picked = (({names, username, role, address, storeName, storageLocation}) =>
+                        ({names, username, role, address, storeName, storageLocation}))(user);
                     res.send(picked);
                 })
 
