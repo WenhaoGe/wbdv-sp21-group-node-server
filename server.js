@@ -7,15 +7,18 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const MONGODB_URI = process.env.MONGODB_URI
 mongoose.connect(MONGODB_URI,
-    {useNewUrlParser: true, useUnifiedTopology: true});
+                 {useNewUrlParser: true, useUnifiedTopology: true});
 
 const session = require('express-session')
 app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-}))
-
+                    secret: 'keyboard cat',
+                    saveUninitialized: true,
+                    proxy: true,
+                    cookie: {
+                        secure: true,
+                        sameSite: "none"
+                    }
+                }))
 
 // configure CORS
 const CLIENT_URL = process.env.CLIENT_URL
@@ -23,9 +26,9 @@ const CLIENT_URL = process.env.CLIENT_URL
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', CLIENT_URL);
     res.header('Access-Control-Allow-Headers',
-        'Content-Type, X-Requested-With, Origin');
+               'Content-Type, X-Requested-With, Origin');
     res.header('Access-Control-Allow-Methods',
-        'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+               'GET, POST, PUT, PATCH, DELETE, OPTIONS');
     res.header("Access-Control-Allow-Credentials", "true");
     next();
 });
@@ -34,8 +37,8 @@ app.use(function (req, res, next) {
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
-}));
+                                  extended: true
+                              }));
 
 require("./controllers/users-controller")(app)
 require("./controllers/drinks-controller")(app)
